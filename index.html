@@ -15,30 +15,37 @@
         <h1>I Got Your Six</h1>
         <p class="subtitle">Anonymous neighborhood watch alerts with GPS precision.</p>
       </div>
-      <button id="locateBtn" class="btn btn-secondary">Use My GPS</button>
+
+      <div class="top-actions">
+        <div class="presence" id="presencePill" aria-live="polite">👥 Active here: 0</div>
+        <button id="locateBtn" class="btn btn-secondary">Use My GPS</button>
+      </div>
     </header>
+
+    <div id="updateAlert" class="update-alert hidden" role="alert" aria-live="assertive"></div>
 
     <main class="layout">
       <section class="panel glass area-panel">
-        <h2>Watch Area</h2>
-        <p class="muted">Create or join an anonymous neighborhood area.</p>
+        <h2>Watch Programs</h2>
+        <p class="muted">Create separate neighborhood programs and click one to activate.</p>
+
         <form id="areaForm" class="stack">
           <label>
-            Area Name
+            Program / Area Name
             <input id="areaName" maxlength="48" placeholder="e.g. Oak Ridge Block 4" required />
           </label>
-          <label>
-            Anonymous Nickname (optional)
-            <input id="nickname" maxlength="32" placeholder="e.g. IGY6-Neighbor-27" />
-          </label>
-          <button class="btn" type="submit">Enter Watch Area</button>
+          <button class="btn" type="submit">Create / Join Program</button>
         </form>
+
         <div id="areaSummary" class="area-summary hidden"></div>
+
+        <h3 class="minor-title">Your Programs</h3>
+        <ul id="areaList" class="program-list"></ul>
       </section>
 
       <section class="panel glass alert-panel">
         <h2>Push Alert</h2>
-        <p class="muted">Alert nearby neighbors instantly and pin the exact location.</p>
+        <p class="muted">Users stay anonymous by default. Add your name only if you want help responders to identify you.</p>
         <form id="alertForm" class="stack">
           <label>
             Alert Type
@@ -49,6 +56,10 @@
               <option value="medical">🩺 Medical</option>
               <option value="emergency">⚠️ Emergency</option>
             </select>
+          </label>
+          <label>
+            Help Name (optional)
+            <input id="helpName" maxlength="40" placeholder="Leave blank to stay anonymous" />
           </label>
           <label>
             Details
