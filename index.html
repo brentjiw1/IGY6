@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I Got Your Six — Neighborhood Watch</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">IGY6 Network</p>
+        <h1>I Got Your Six</h1>
+        <p class="subtitle">Anonymous neighborhood watch alerts with GPS precision.</p>
+      </div>
+
+      <div class="top-actions">
+        <div class="presence" id="presencePill" aria-live="polite">👥 Active here: 0</div>
+        <button id="locateBtn" class="btn btn-secondary">Use My GPS</button>
+      </div>
+    </header>
+
+    <div id="updateAlert" class="update-alert hidden" role="alert" aria-live="assertive"></div>
+
+    <main class="layout">
+      <section class="panel glass area-panel">
+        <h2>Watch Programs</h2>
+        <p class="muted">Create separate neighborhood programs and click one to activate.</p>
+
+        <form id="areaForm" class="stack">
+          <label>
+            Program / Area Name
+            <input id="areaName" maxlength="48" placeholder="e.g. Oak Ridge Block 4" required />
+          </label>
+          <button class="btn" type="submit">Create / Join Program</button>
+        </form>
+
+        <div id="areaSummary" class="area-summary hidden"></div>
+
+        <h3 class="minor-title">Your Programs</h3>
+        <ul id="areaList" class="program-list"></ul>
+      </section>
+
+      <section class="panel glass alert-panel">
+        <h2>Push Alert</h2>
+        <p class="muted">Users stay anonymous by default. Add your name only if you want help responders to identify you.</p>
+        <form id="alertForm" class="stack">
+          <label>
+            Alert Type
+            <select id="alertType" required>
+              <option value="">Select alert</option>
+              <option value="fire">🔥 Fire</option>
+              <option value="burglary">🚨 Burglary / Break-in</option>
+              <option value="medical">🩺 Medical</option>
+              <option value="emergency">⚠️ Emergency</option>
+            </select>
+          </label>
+          <label>
+            Help Name (optional)
+            <input id="helpName" maxlength="40" placeholder="Leave blank to stay anonymous" />
+          </label>
+          <label>
+            Details
+            <textarea id="details" rows="3" maxlength="220" placeholder="What should neighbors know?"></textarea>
+          </label>
+          <label class="inline">
+            <input id="share911" type="checkbox" />
+            Mark as critical & suggest 911 escalation
+          </label>
+          <button class="btn btn-danger" type="submit">Send Alert</button>
+        </form>
+
+        <div class="actions">
+          <a class="btn btn-ghost" href="tel:911">Call 911</a>
+          <a class="btn btn-ghost" href="sms:911">Text Emergency (if supported)</a>
+        </div>
+      </section>
+
+      <section class="panel glass map-panel">
+        <div class="map-header">
+          <h2>Neighborhood Map</h2>
+          <p class="muted">Tap map to drop a pin before sending an alert.</p>
+        </div>
+        <div id="map" aria-label="Neighborhood alert map"></div>
+      </section>
+
+      <section class="panel glass feed-panel">
+        <h2>Live Area Feed</h2>
+        <ul id="feed" class="feed"></ul>
+      </section>
+    </main>
+
+    <template id="feedItemTemplate">
+      <li class="feed-item">
+        <div class="feed-head">
+          <span class="badge"></span>
+          <time></time>
+        </div>
+        <p class="feed-meta"></p>
+        <p class="feed-details"></p>
+      </li>
+    </template>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="app.js"></script>
+  </body>
+</html>
